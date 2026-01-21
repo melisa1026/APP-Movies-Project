@@ -56,4 +56,4 @@ bin/
 build
 
 #secrets
-play-java-starter-example/conf/application.conf
+play-java-starter-example/conf/secrets.conf
