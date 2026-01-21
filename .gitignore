@@ -54,3 +54,6 @@ bin/
 # Gradle
 .gradle
 build
+
+#secrets
+play-java-starter-example/conf/application.conf
