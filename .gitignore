@@ -57,3 +57,4 @@ build
 
 #secrets
 play-java-starter-example/conf/secrets.conf
+play-java-starter-example/conf/application.conf
