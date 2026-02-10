@@ -1,0 +1,16 @@
+@(results: ArrayList[SearchResult])
+
+<body>
+
+    @searchHeader()
+
+    <!-- Search Results -->
+    <ul class="movie-list">
+    @for((query, index) <- results.zipWithIndex) {
+        <h2>@query.getSearchQuery()</h2>
+        <li class="movie-item">
+            @movies(query.getMovies())
+        </li>
+    }
+    </ul>
+</body>

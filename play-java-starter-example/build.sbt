@@ -1,3 +1,5 @@
+import sbt.Keys.libraryDependencies
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   //.enablePlugins(PlayNettyServer).disablePlugins(PlayPekkoHttpServer) // uncomment to use the Netty backend
@@ -8,6 +10,7 @@ lazy val root = (project in file("."))
     scalaVersion := crossScalaVersions.value.head,
     libraryDependencies ++= Seq(
       guice,
+      javaWs,  // enables WSClient for making HTTP requests
       // Test Database
       "com.h2database" % "h2" % "2.3.232",
       // Testing libraries for dealing with CompletionStage...
@@ -23,5 +26,7 @@ lazy val root = (project in file("."))
     ),
     (Test / javaOptions) += "-Dtestserver.port=19001",
     // Make verbose tests
-    (Test / testOptions) := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+    (Test / testOptions) := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v")),
+
+      libraryDependencies += "com.google.code.gson" % "gson" % "2.8.9"
   )

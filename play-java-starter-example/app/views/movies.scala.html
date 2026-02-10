@@ -1,0 +1,13 @@
+@(results: List[models.Movie])
+
+<body>
+
+    <!-- Search Results -->
+    <ul class="movie-list">
+        @for((movie, index) <- results.zipWithIndex) {
+            <li class="movie-item">
+                @movie.getTitle();
+            </li>
+        }
+    </ul>
+</body>

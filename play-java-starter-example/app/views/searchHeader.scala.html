@@ -1,0 +1,15 @@
+@()
+
+<body>
+    <h1>Welcome to FlickLytics</h1>
+
+    <form action="@routes.AppController.search("", "")" method="GET">
+        <input name="query" type="text" placeholder="Search..">
+        <select name="category" id="category">
+            <option value="movie">Movie</option>
+            <option value="tvShow">TV Show</option>
+            <option value="person">Person</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>

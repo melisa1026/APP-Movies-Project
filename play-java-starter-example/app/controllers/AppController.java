@@ -1,10 +1,11 @@
 package controllers;
 
 import play.mvc.*;
-
+import services.TMDbService;
 import views.html.*;
 
 import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -12,15 +13,21 @@ import javax.inject.Inject;
  */
 public class AppController extends Controller {
 
-    @Inject
-    public AppController() { }
+    TMDbService tmdbService;
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
+    @Inject
+    public AppController(TMDbService tmdbService) {
+        this.tmdbService = tmdbService;
+    }
+
+    public CompletionStage<Result> search(String query, String category, Http.Request request) {
+        return tmdbService.search(query, category)
+                .thenApply(searchResults -> {
+                    return ok(views.html.searchResults.render((tmdbService.getAllSearches(searchResults))))
+                            .addingToSession(request, "queryList", tmdbService.getJsonQueryList());
+                });
+    }
+
     public Result index() {
         return ok(
                 home.render());
